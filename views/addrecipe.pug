@@ -1,0 +1,47 @@
+extends layout
+
+block content
+    body(style='background-color: #f0f8ff;')
+        .form-container(style='text-align: center; padding: 20px;')
+            h1(style='color: #007bff;') Add Recipe
+
+            if message
+                p.message(style='color: red;')= message
+
+            form(action='/recipes/add' method='post' style='margin-top: 20px;')
+                label(for='name' style='display: block; margin-bottom: 10px;') Name:
+                input(type='text' id='name' name='name' placeholder='Enter recipe name' style='width: 100%; padding: 10px; box-sizing: border-box;' required)
+
+                label(for='description' style='display: block; margin-bottom: 10px;') Description:
+                textarea(id='description' name='description' placeholder='Enter recipe description' style='width: 100%; padding: 10px; box-sizing: border-box;' required)
+
+                label(for='difficulty' style='display: block; margin-bottom: 10px;') Difficulty:
+                select(id='difficulty' name='difficulty' style='width: 100%; padding: 10px; box-sizing: border-box;' required)
+                    option(value='Easy') Easy
+                    option(value='Intermediate') Intermediate
+                    option(value='Hard') Hard
+
+                label(for='ingredients' style='display: block; margin-bottom: 10px;') Ingredients:
+                div(id='ingredients-container' style='margin-bottom: 10px;')
+                    input(type='text' id='ingredients' name='ingredients' placeholder='Enter ingredient' style='width: 100%; padding: 10px; box-sizing: border-box;' required)
+                button(type='button' onclick='addInput("ingredients-container", "ingredients")' style='padding: 10px; background-color: #007bff; border: 1px solid #007bff; border-radius: 5px; color: #fff; cursor: pointer;') Add Ingredient
+
+                label(for='steps' style='display: block; margin-bottom: 10px;') Steps:
+                div(id='steps-container' style='margin-bottom: 10px;')
+                    textarea(id='steps' name='steps' placeholder='Enter step' style='width: 100%; padding: 10px; box-sizing: border-box;' required)
+                button(type='button' onclick='addInput("steps-container", "steps")' style='padding: 10px; background-color: #007bff; border: 1px solid #007bff; border-radius: 5px; color: #fff; cursor: pointer;') Add Step
+
+                input(type='submit' value='Add Recipe' style='padding: 10px; background-color: #28a745; border: 1px solid #28a745; border-radius: 5px; color: #fff; cursor: pointer; margin-top: 20px;')
+
+            script.
+                function addInput(containerId, inputName) {
+                    const container = document.getElementById(containerId);
+                    const input = document.createElement(inputName === 'ingredients' ? 'input' : 'textarea');
+                    input.type = inputName === 'ingredients' ? 'text' : 'textarea';
+                    input.name = inputName;
+                    input.placeholder = inputName === 'ingredients' ? 'Enter ingredient' : 'Enter step';
+                    input.style.width = '100%';
+                    input.style.padding = '10px';
+                    input.style.boxSizing = 'border-box';
+                    container.appendChild(input);
+                }

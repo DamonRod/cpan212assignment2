@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    body(style='background-color: #f0f8ff;')
+        .recipe-container(style='text-align: center; padding: 20px;')
+            h1(style='color: #007bff;')= recipe.name
+
+            p.description(style='margin-bottom: 20px;') Description:
+            p(style='margin-bottom: 20px;')= recipe.description
+
+            p(style='margin-bottom: 20px;') Difficulty: #{recipe.difficulty}
+
+            h2(style='margin-bottom: 10px;') Ingredients
+            ul(style='list-style-type: none; padding: 0;')
+                each ingredient in recipe.ingredients
+                    li(style='margin-bottom: 5px;')= ingredient
+
+            h2(style='margin-bottom: 10px;') Steps
+            ol(style='list-style-type: none; padding: 0;')
+                each step in recipe.steps
+                    li(style='margin-bottom: 5px;')= step
+
+            .recipe-actions(style='margin-top: 20px;')
+                a.edit-btn(href=`/recipes/${recipe._id}/edit` style='padding: 10px 20px; background-color: #007bff; border: 1px solid #007bff; border-radius: 5px; margin-right: 10px;') Edit Recipe
+                a.delete-btn(href=`/recipes/${recipe._id}/delete` style='padding: 10px 20px; background-color: #dc3545; border: 1px solid #dc3545; border-radius: 5px; color: #fff; text-decoration: none; cursor: pointer; margin-right: 10px;') Delete Recipe

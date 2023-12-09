@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  .container
+    h2 Delete Recipe
+    p Are you sure you want to delete the recipe?
+    form(action=`/recipes/${recipe._id}/delete` method="post")
+      button(type="submit") Delete
